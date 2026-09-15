@@ -35,11 +35,52 @@
     });
   }
 
+  function initializeSectionNav() {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".masthead__nav a[data-section]"));
+    var sections = links.map(function (link) {
+      return document.getElementById(link.getAttribute("data-section"));
+    });
+    if (!links.length) return;
+
+    function highlightCurrentSection() {
+      var current = 0;
+      var nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+      sections.forEach(function (section, index) {
+        if (section && (section.getBoundingClientRect().top <= 120 || nearBottom)) current = index;
+      });
+      links.forEach(function (link, index) {
+        if (index === current) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    highlightCurrentSection();
+    window.addEventListener("scroll", highlightCurrentSection, { passive: true });
+  }
+
+  function initializeGitHubDates() {
+    document.querySelectorAll("time[data-github-repo]").forEach(function (time) {
+      fetch("https://api.github.com/repos/" + time.getAttribute("data-github-repo"))
+        .then(function (response) { return response.ok ? response.json() : null; })
+        .then(function (repo) {
+          if (!repo || !repo.pushed_at) return;
+          var date = new Date(repo.pushed_at);
+          time.setAttribute("datetime", repo.pushed_at);
+          time.textContent = date.toLocaleDateString("en-US", {
+            year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
+          });
+        })
+        .catch(function () {});
+    });
+  }
+
   applySystemTheme(systemTheme);
   systemTheme.addEventListener("change", applySystemTheme);
 
   document.addEventListener("DOMContentLoaded", function () {
     initializeAuthorLinks();
+    initializeSectionNav();
+    initializeGitHubDates();
     reserveFooterSpace();
   });
   window.addEventListener("resize", reserveFooterSpace);

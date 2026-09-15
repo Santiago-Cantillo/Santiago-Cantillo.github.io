@@ -33,6 +33,82 @@
     "vendor/font-awesome/brands"
 ;
 
+/* Top navigation to sections of the one-page site */
+:root {
+  --masthead-height: 3.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: var(--global-bg-color);
+  border-bottom: 1px solid var(--global-border-color);
+}
+
+.masthead__nav {
+  @include container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.75rem;
+  min-height: var(--masthead-height);
+  padding: 0 1em;
+  font-family: $global-font-family;
+  font-size: 0.95em;
+
+  @include breakpoint($x-large) {
+    max-width: $x-large;
+  }
+
+  a {
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid transparent;
+    color: var(--global-text-color-light);
+    text-decoration: none;
+
+    &:hover,
+    &[aria-current="true"] {
+      border-bottom-color: var(--global-link-color);
+      color: var(--global-link-color);
+    }
+  }
+}
+
+.page__content [id] {
+  scroll-margin-top: 4.5rem;
+}
+
+// Pin the fixed sidebar below the sticky masthead instead of relying on its
+// static position, which the browser computes at whatever scroll the page loads.
+.sidebar {
+  @media screen and (min-width: $sidebar-screen-min-width) {
+    top: calc(var(--masthead-height) + 2em);
+    height: calc(100vh - var(--masthead-height) - 2em);
+  }
+}
+
+.sidebar .author__avatar {
+  @include breakpoint($large) {
+    margin-top: 1.25rem;
+  }
+}
+
+.sidebar .author__name {
+  font-family: $header-font-family;
+  font-size: 1.15em;
+}
+
+.author__avatar img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
 /* Research page entries */
 .research-heading {
   margin-top: 2.75rem;
@@ -48,6 +124,7 @@
 .research-section-title {
   margin: 2.25rem 0 1.25rem;
   color: var(--global-text-color-light);
+  font-family: $global-font-family;
   font-size: 0.85em;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -90,6 +167,11 @@
   }
 }
 
+.research-item__description {
+  margin: 0 0 0.35rem;
+  font-size: 0.85em;
+}
+
 .research-item__meta {
   display: inline-block;
   margin-left: 0;
@@ -100,8 +182,25 @@
   font-weight: normal;
 
   a {
-    color: inherit;
+    color: var(--global-link-color);
+
+    &:hover {
+      color: var(--global-link-color-hover);
+    }
   }
+}
+
+.research-item__badge {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  border: 1px solid var(--global-link-color);
+  border-radius: 999px;
+  color: var(--global-link-color);
+  font-family: $global-font-family;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .research-item__abstract {
@@ -113,7 +212,7 @@
     align-items: center;
     width: fit-content;
     gap: 0.35rem;
-    color: var(--global-text-color-light);
+    color: var(--global-link-color);
     cursor: pointer;
     font-size: 0.9em;
     font-weight: normal;

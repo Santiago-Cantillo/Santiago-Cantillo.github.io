@@ -21,8 +21,9 @@ RUN chown -R vscode:vscode /usr/src/app
 # Switch to the non-root user
 USER vscode
 
-# Copy Gemfile into the container (necessary for `bundle install`)
-COPY Gemfile ./
+# Copy the dependency manifest and lockfile so the image installs the same
+# exact gem versions that Jekyll sees when the project is bind-mounted.
+COPY --chown=vscode:vscode Gemfile Gemfile.lock ./
 
 
 

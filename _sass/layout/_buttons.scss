@@ -53,7 +53,7 @@
     background-color: var(--global-bg-color);
 
     &:hover {
-      color: #fff !important;
+      color: var(--global-text-color) !important;
       border-color: var(--global-text-color-light);
     }
   }

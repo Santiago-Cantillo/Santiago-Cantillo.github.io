@@ -139,7 +139,7 @@ With [Renee Bowen][renee_site], [Lawrence Broz][broz_site], Yung-Chun Chen, and 
   <span class="research-item__meta"><a href="https://github.com/Santiago-Cantillo/AI-for-Economists">GitHub</a></span>
 </h4>
 
-Some tools for economists to unlock the potential of LLMs, from batch processing with the OpenAI API to setting up VS Code for research.
+Some tools for economists to unlock the potential of LLMs, from setting up VS Code for research to using OpenAI's API to batch process large amounts of data systematically.
 {: .research-item__description}
 
 <p class="research-item__byline">Last updated <time datetime="2025-09-30T17:38:07Z" data-github-repo="Santiago-Cantillo/AI-for-Economists">September 30, 2025</time></p>

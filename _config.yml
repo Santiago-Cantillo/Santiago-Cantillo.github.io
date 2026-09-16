@@ -9,7 +9,7 @@ baseurl         : ""
 repository      : "Santiago-Cantillo/Santiago-Cantillo.github.io"
 
 author:
-  avatar   : "yo.jpeg"
+  avatar   : "yo.png"
   name     : "Santiago Cantillo-Cleves"
   bio      : "Economics PhD Candidate"
   location : "UC San Diego"
